@@ -60,16 +60,16 @@
 #include "nvblox_ros/mapper_initialization.hpp"
 #include "nvblox_ros/transformer.hpp"
 #include "nvblox_ros/camera_cache.hpp"
-#include "nvblox_ros/nitros_types.hpp"
+// #include "nvblox_ros/nitros_types.hpp"
 #include "nvblox_ros/node_params.hpp"
 #include "nvblox_ros/service_request_task.hpp"
 
-#include "isaac_ros_managed_nitros/managed_nitros_message_filters_subscriber.hpp"
-#include "isaac_ros_managed_nitros/managed_nitros_publisher.hpp"
-#include "isaac_ros_managed_nitros/managed_nitros_subscriber.hpp"
-#include "isaac_ros_nitros_camera_info_type/nitros_camera_info.hpp"
-#include "isaac_ros_nitros_image_type/nitros_image.hpp"
-#include "isaac_ros_nitros_image_type/nitros_image_view.hpp"
+// #include "isaac_ros_managed_nitros/managed_nitros_message_filters_subscriber.hpp"
+// #include "isaac_ros_managed_nitros/managed_nitros_publisher.hpp"
+// #include "isaac_ros_managed_nitros/managed_nitros_subscriber.hpp"
+// #include "isaac_ros_nitros_camera_info_type/nitros_camera_info.hpp"
+// #include "isaac_ros_nitros_image_type/nitros_image.hpp"
+// #include "isaac_ros_nitros_image_type/nitros_image_view.hpp"
 
 namespace nvblox
 {
