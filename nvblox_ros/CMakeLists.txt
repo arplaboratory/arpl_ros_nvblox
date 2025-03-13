@@ -219,8 +219,6 @@ install(DIRECTORY
   scripts
   DESTINATION share/${PROJECT_NAME}/scripts/
 )
-install(DIRECTORY ${ext_stdgpu_SOURCE_DIR}/include/
-        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/stdgpu)
 
 if(BUILD_TESTING)
   # Linting
