@@ -84,12 +84,12 @@ find_package(Threads REQUIRED)
 find_package(visualization_msgs REQUIRED)
 find_package(cv_bridge REQUIRED)
 find_package(nvblox_ros_common REQUIRED)
-find_package(isaac_ros_common REQUIRED)
+#find_package(isaac_ros_common REQUIRED)
 find_package(CUDAToolkit REQUIRED)
-find_package(isaac_ros_managed_nitros REQUIRED)
-find_package(isaac_ros_nitros_image_type REQUIRED)
-find_package(isaac_ros_nitros_camera_info_type REQUIRED)
-find_package(isaac_ros_gxf REQUIRED)
+#find_package(isaac_ros_managed_nitros REQUIRED)
+#find_package(isaac_ros_nitros_image_type REQUIRED)
+#find_package(isaac_ros_nitros_camera_info_type REQUIRED)
+#find_package(isaac_ros_gxf REQUIRED)
 
 #############
 # LIBRARIES #
@@ -135,11 +135,11 @@ ament_target_dependencies(${PROJECT_NAME}_lib
   visualization_msgs
   cv_bridge
   nvblox_ros_common
-  isaac_ros_managed_nitros
-  isaac_ros_nitros_image_type
-  isaac_ros_nitros_camera_info_type
-  isaac_ros_gxf
-  isaac_ros_common
+  #isaac_ros_managed_nitros
+  #isaac_ros_nitros_image_type
+  #isaac_ros_nitros_camera_info_type
+  #isaac_ros_gxf
+  #isaac_ros_common
 )
 target_include_directories(${PROJECT_NAME}_lib PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
@@ -195,7 +195,7 @@ install(
 
 # Install the library target.
 install(
-  TARGETS ${PROJECT_NAME}_lib nvblox_lib nvblox_eigen nvblox_datasets nvblox_gpu_hash stdgpu
+  TARGETS ${PROJECT_NAME}_lib nvblox_lib nvblox_eigen nvblox_datasets nvblox_gpu_hash nvblox_stdgpu
   EXPORT ${PROJECT_NAME}Targets
   LIBRARY DESTINATION lib
   ARCHIVE DESTINATION lib
@@ -219,6 +219,8 @@ install(DIRECTORY
   scripts
   DESTINATION share/${PROJECT_NAME}/scripts/
 )
+install(DIRECTORY ${ext_stdgpu_SOURCE_DIR}/include/
+        DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/stdgpu)
 
 if(BUILD_TESTING)
   # Linting
@@ -282,8 +284,8 @@ ament_export_dependencies(
   libstatistics_collector
   visualization_msgs
   cv_bridge
-  isaac_ros_gxf
-  isaac_ros_managed_nitros
+  #isaac_ros_gxf
+  #isaac_ros_managed_nitros
   nvblox_ros_common
   nvblox_msgs
   std_srvs
