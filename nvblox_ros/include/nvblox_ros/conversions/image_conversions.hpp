@@ -29,7 +29,7 @@
 
 #include <rclcpp/rclcpp.hpp>
 
-#include "nvblox_ros/nitros_types.hpp"
+// #include "nvblox_ros/nitros_types.hpp"
 #include "nvblox_ros/conversions/image_conversions_thrust.hpp"
 
 namespace nvblox
@@ -98,10 +98,10 @@ void imageMessageFromColorImage(
 /// @param logger       ROS2 logger
 /// @param cuda_stream  Cuda stream used for copying data
 /// @return True on success, False on failure.
-bool depthImageFromNitrosViewAsync(
-  const NitrosView & view,
-  DepthImage * depth_image, rclcpp::Logger logger,
-  const CudaStream & cuda_stream);
+// bool depthImageFromNitrosViewAsync(
+//   const NitrosView & view,
+//   DepthImage * depth_image, rclcpp::Logger logger,
+//   const CudaStream & cuda_stream);
 
 /// Convert Nitros image message to color frame object
 ///
@@ -112,14 +112,14 @@ bool depthImageFromNitrosViewAsync(
 /// @param logger       ROS2 logger
 /// @param cuda_stream  Cuda stream used for copying data
 /// @return True on success, False on failure.
-bool colorImageFromNitrosViewAsync(
-  const NitrosView & view,
-  ColorImage * color_image,
-  rclcpp::Logger logger, const CudaStream & cuda_stream);
+// bool colorImageFromNitrosViewAsync(
+//   const NitrosView & view,
+//   ColorImage * color_image,
+//   rclcpp::Logger logger, const CudaStream & cuda_stream);
 
-bool monoImageFromNitrosViewAsync(
-  const NitrosView & view, MonoImage * mono_image,
-  rclcpp::Logger logger, const CudaStream & cuda_stream);
+// bool monoImageFromNitrosViewAsync(
+//   const NitrosView & view, MonoImage * mono_image,
+//   rclcpp::Logger logger, const CudaStream & cuda_stream);
 
 }  // namespace conversions
 }  // namespace nvblox
