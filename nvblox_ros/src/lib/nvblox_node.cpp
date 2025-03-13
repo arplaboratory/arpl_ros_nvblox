@@ -30,7 +30,7 @@
 #include <utility>
 #include <vector>
 
-#include <isaac_ros_common/qos.hpp>
+#include <nvblox_ros_common/qos.hpp>
 
 #include "nvblox_ros/conversions/esdf_and_gradients_conversions.hpp"
 #include "nvblox_ros/conversions/occupancy_conversions.hpp"
