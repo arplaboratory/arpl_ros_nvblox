@@ -31,7 +31,9 @@ function(add_nvblox_ros_unit_test test_name)
 endfunction()
 
 # nvblox ROS unit tests
-# TODO: fix this, this is related to stdgpu linking issue caused by problematic cmake setup
+# TODO: this is related to stdgpu linking issue caused by problematic cmake setup
+# hack: build the pipeline with this test first, retrigger cmake of nvblox_core and build it again
+#       with this test
 # add_nvblox_ros_unit_test(test_esdf_and_gradient_conversions)
 add_nvblox_ros_unit_test(test_node_params)
 add_nvblox_ros_unit_test(test_rosbag_data_loader)

@@ -57,6 +57,7 @@
 #include "nvblox_ros/conversions/pointcloud_conversions.hpp"
 #include "nvblox_ros/conversions/esdf_slice_conversions.hpp"
 #include "nvblox_ros/conversions/esdf_and_gradients_conversions.hpp"
+#include "nvblox_ros/conversions/layer_conversions.hpp"
 #include "nvblox_ros/mapper_initialization.hpp"
 #include "nvblox_ros/transformer.hpp"
 #include "nvblox_ros/camera_cache.hpp"
@@ -181,6 +182,9 @@ public:
 
   // Publish debug visualizations for rviz
   void publishDebugVisualizations();
+
+  // Publish data on fixed frequency
+  void publishOccupancyPointcloud();
 
   // Process data
   virtual bool processDepthImage(const ImageTypeVariant & depth_mask_msg);
@@ -435,6 +439,8 @@ protected:
     dynamic_occupancy_grid_publisher_;
   rclcpp::Publisher<nav_msgs::msg::OccupancyGrid>::SharedPtr
     combined_occupancy_grid_publisher_;
+  rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr
+    static_occupancy_publisher_;
 
   // Services.
   rclcpp::Service<nvblox_msgs::srv::FilePath>::SharedPtr save_ply_service_;
@@ -494,6 +500,7 @@ protected:
   conversions::PointcloudConverter pointcloud_converter_;
   conversions::EsdfSliceConverter esdf_slice_converter_;
   conversions::EsdfAndGradientsConverter esdf_and_gradients_converter_;
+  conversions::LayerConverter layer_converter_;
 
   // Caches for GPU images
   ColorImage color_image_{MemoryType::kDevice};

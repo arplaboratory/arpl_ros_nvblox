@@ -103,6 +103,7 @@ add_library(${PROJECT_NAME}_lib SHARED
   src/lib/conversions/esdf_slice_conversions.cu
   src/lib/conversions/esdf_and_gradients_conversions.cu
   src/lib/conversions/transform_conversions.cpp
+  src/lib/conversions/layer_conversions.cu
   src/lib/layer_publishing.cpp
   src/lib/camera_cache.cpp
   src/lib/visualization.cpp
@@ -117,7 +118,7 @@ add_library(${PROJECT_NAME}_lib SHARED
   src/lib/rosbag_reading.cpp
 )
 set_nvblox_compiler_options(${PROJECT_NAME}_lib)
-target_link_libraries(${PROJECT_NAME}_lib nvblox_lib nvblox_eigen nvblox_datasets pthread glog)
+target_link_libraries(${PROJECT_NAME}_lib nvblox_lib nvblox_eigen nvblox_stdgpu nvblox_datasets pthread glog)
 ament_target_dependencies(${PROJECT_NAME}_lib
   rclcpp
   rclcpp_components

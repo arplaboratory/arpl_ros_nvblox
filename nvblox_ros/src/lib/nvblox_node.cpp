@@ -378,6 +378,9 @@ void NvbloxNode::advertiseTopics()
   combined_occupancy_grid_publisher_ =
     create_publisher<nav_msgs::msg::OccupancyGrid>("~/combined_occupancy_grid", 1);
 
+  static_occupancy_publisher_ =
+    create_publisher<sensor_msgs::msg::PointCloud2>("~/static_occupancy", 1);
+
   // Debug outputs
   esdf_slice_bounds_publisher_ =
     create_publisher<visualization_msgs::msg::Marker>("~/esdf_slice_bounds", 1);
@@ -938,6 +941,17 @@ void NvbloxNode::publishOccupancyGridMsg(
 
   // Publish the message
   occupancy_grid_publisher->publish(occupancy_grid_msg);
+}
+
+void NvbloxNode::publishOccupancyPointcloud()
+{
+  if (static_occupancy_publisher_->get_subscription_count() > 0) {
+    sensor_msgs::msg::PointCloud2 pointcloud_msg;
+    layer_converter_.pointcloudMsgFromLayer(static_mapper_->occupancy_layer(), &pointcloud_msg);
+    pointcloud_msg.header.frame_id = params_.global_frame.get();
+    pointcloud_msg.header.stamp = get_clock()->now();
+    static_occupancy_publisher_->publish(pointcloud_msg);
+  }
 }
 
 void NvbloxNode::decayDynamicOccupancy()
