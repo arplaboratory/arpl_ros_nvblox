@@ -158,6 +158,7 @@ void initializeNvbloxNodeParams(
   initParam<float>(node, &params->publish_debug_vis_rate_hz, parameter_tree);
   initParam<float>(node, &params->decay_tsdf_rate_hz, parameter_tree);
   initParam<float>(node, &params->decay_dynamic_occupancy_rate_hz, parameter_tree);
+  initParam<float>(node, &params->publish_static_occupancy_rate_hz, parameter_tree);
   initParam<float>(node, &params->clear_map_outside_radius_rate_hz, parameter_tree);
   initParam<float>(node, &params->map_clearing_radius_m, parameter_tree);
   initParam<float>(node, &params->esdf_and_gradients_unobserved_value, parameter_tree);

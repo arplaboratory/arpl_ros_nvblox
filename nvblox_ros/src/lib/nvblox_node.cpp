@@ -418,6 +418,13 @@ void NvbloxNode::advertiseTopics()
     combined_map_slice_publisher_ =
       create_publisher<nvblox_msgs::msg::DistanceMapSlice>("~/combined_map_slice", 1);
   }
+  if (isStaticOccupancy(params_.mapping_type)) {
+    occupancy_publishing_timer_ = create_wall_timer(
+      std::chrono::duration<double>(1.0 / params_.publish_static_occupancy_rate_hz),
+      std::bind(&NvbloxNode::publishOccupancyPointcloud, this),
+      group_processing_);
+  }
+
 }
 
 void NvbloxNode::advertiseServices()

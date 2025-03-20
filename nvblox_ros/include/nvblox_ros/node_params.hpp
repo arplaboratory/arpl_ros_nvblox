@@ -228,6 +228,10 @@ constexpr Param<float>::Description kDecayDynamicOccupancyRateHzParamDesc{
   "decay_dynamic_occupancy_rate_hz", 10.F,
   "The desired rate for decaying the dynamic occupancy layer."};
 
+constexpr Param<float>::Description kPublishStaticOccupancyRateHzParamDesc{
+  "publish_static_occupancy_rate_hz", 10.F,
+  "The desired rate for publishing static occupancy as PointCloud2."};
+
 constexpr Param<float>::Description kClearMapOutsideRadiusRateHzParamDesc{
   "clear_map_outside_radius_rate_hz", 1.F,
   "The desired rate for clearing the map from blocks far away from the robot."};
@@ -365,6 +369,7 @@ public:
   Param<float> publish_debug_vis_rate_hz{kPublishDebugVisRateHzParamDesc};
   Param<float> decay_tsdf_rate_hz{kDecayTsdfRateHzParamDesc};
   Param<float> decay_dynamic_occupancy_rate_hz{kDecayDynamicOccupancyRateHzParamDesc};
+  Param<float> publish_static_occupancy_rate_hz{kDecayDynamicOccupancyRateHzParamDesc};
   Param<float> clear_map_outside_radius_rate_hz{kClearMapOutsideRadiusRateHzParamDesc};
   Param<float> esdf_and_gradients_unobserved_value{kEsdfAndGradientsUnobservedValueParamDesc};
   Param<float> map_clearing_radius_m{kMapClearingRadiusMParamDesc};

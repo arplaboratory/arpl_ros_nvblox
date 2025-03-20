@@ -455,6 +455,7 @@ protected:
 
   // Timers.
   rclcpp::TimerBase::SharedPtr queue_processing_timer_;
+  rclcpp::TimerBase::SharedPtr occupancy_publishing_timer_;
 
   // Collection of params for the nvblox node
   NvbloxNodeParams params_;
