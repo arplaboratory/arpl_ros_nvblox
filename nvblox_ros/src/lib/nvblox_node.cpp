@@ -223,6 +223,7 @@ void NvbloxNode::subscribeToTopics()
   pointcloud_queue_ = std::make_unique<std::list<sensor_msgs::msg::PointCloud2::ConstSharedPtr>>();
   esdf_service_queue_ = std::make_unique<std::list<EsdfServiceQueuedType>>();
   file_path_service_queue_ = std::make_unique<std::list<FilePathServiceQueuedType>>();
+  clear_map_service_queue_ = std::make_unique<std::list<ClearMapServiceQueuedType>>();
 
   constexpr int kQueueSize = 10;
 
@@ -456,6 +457,10 @@ void NvbloxNode::advertiseServices()
     std::bind(
       &NvbloxNode::getEsdfAndGradientService, this, std::placeholders::_1,
       std::placeholders::_2),
+    rmw_qos_profile_services_default);
+  clear_map_service_ = create_service<std_srvs::srv::Empty>(
+    "~/clear_map",
+    std::bind(&NvbloxNode::clearMapService, this, std::placeholders::_1, std::placeholders::_2),
     rmw_qos_profile_services_default);
 }
 
@@ -789,6 +794,11 @@ void NvbloxNode::processServiceRequestTaskQueue()
   processQueue<FilePathServiceQueuedType>(
     file_path_service_queue_,
     &file_path_service_queue_mutex_,
+    service_ready,
+    task);
+  processQueue<ClearMapServiceQueuedType>(
+    clear_map_service_queue_,
+    &clear_map_service_queue_mutex_,
     service_ready,
     task);
   // If a service requested visualization, publish right now.
@@ -1826,6 +1836,54 @@ void NvbloxNode::getEsdfAndGradientService(
 
   // Push the task onto the queue and wait for completion.
   pushOntoQueue(kEsdfServiceQueueName, task, esdf_service_queue_, &esdf_service_queue_mutex_);
+  task->waitForTaskCompletion();
+}
+void NvbloxNode::clearMapService(
+  const std::shared_ptr<std_srvs::srv::Empty::Request> request,
+  std::shared_ptr<std_srvs::srv::Empty::Response> response)
+{
+  // Define the task function
+  TaskFunctionType<NvbloxNode, std_srvs::srv::Empty> request_task =
+    [](auto node,
+      auto service_request,
+      auto service_response) {
+      RCLCPP_INFO(node->get_logger(), "Clearing the entire map");
+
+      // Get the current position
+      Transform T_L_MC;
+      if (node->transformer_.lookupTransformToGlobalFrame(
+          node->params_.map_clearing_frame_id, rclcpp::Time(0),
+          &T_L_MC))
+      {
+        // Set radius to 0 to clear everything
+        float original_radius = node->params_.map_clearing_radius_m;
+        node->params_.map_clearing_radius_m = 0.0f;
+
+        // Call the existing function to clear everything
+        node->clearMapOutsideOfRadiusOfLastKnownPose();
+
+        // Restore the original radius
+        node->params_.map_clearing_radius_m = original_radius;
+
+        // Request visualization update
+        node->publish_layers_requested_ = true;
+
+        RCLCPP_INFO(node->get_logger(), "Map cleared successfully");
+        return true;
+      } else {
+        RCLCPP_ERROR(
+          node->get_logger(), "Failed to lookup transform for frame: %s",
+          node->params_.map_clearing_frame_id.get().c_str());
+        return false;
+      }
+    };
+
+  // Create the ServiceRequestTask
+  auto task =
+    std::make_shared<ServiceRequestTask<NvbloxNode, std_srvs::srv::Empty>>(
+    request_task, this, request, response);
+  // Push the task onto the queue and wait for completion.
+  pushOntoQueue(kClearMapServiceQueueName, task, clear_map_service_queue_, &clear_map_service_queue_mutex_);
   task->waitForTaskCompletion();
 }
 
