@@ -1857,7 +1857,7 @@ void NvbloxNode::clearMapService(
       {
         // Set radius to 0 to clear everything
         float original_radius = node->params_.map_clearing_radius_m;
-        node->params_.map_clearing_radius_m = 0.0f;
+        node->params_.map_clearing_radius_m = 0.01f;
 
         // Call the existing function to clear everything
         node->clearMapOutsideOfRadiusOfLastKnownPose();
