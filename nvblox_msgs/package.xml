@@ -24,7 +24,7 @@
   <version>3.2.5</version>
   <description>ROS 2 messages for Nvblox types</description>
 
-  <maintainer email="isaac-ros-maintainers@nvidia.com">Isaac ROS Maintainers</maintainer>
+  <maintainer email="yangzhou@nyu.edu">Yang Zhou</maintainer>
   <maintainer email="isaac-ros-maintainers@nvidia.com">Isaac ROS Maintainers</maintainer>
   <license>Apache-2.0</license>
   <url type="website">https://developer.nvidia.com/isaac-ros-gems/</url>
@@ -34,7 +34,7 @@
   <buildtool_depend>ament_cmake</buildtool_depend>
 
   <build_depend>rosidl_default_generators</build_depend>
-  <build_depend>isaac_ros_common</build_depend>
+  <!--build_depend>isaac_ros_common</build_depend-->
   <exec_depend>rosidl_default_runtime</exec_depend>
 
   <depend>std_msgs</depend>
