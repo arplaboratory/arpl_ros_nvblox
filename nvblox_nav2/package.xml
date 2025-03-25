@@ -24,7 +24,7 @@
   <version>3.2.5</version>
   <description>NVBlox ROS 2 Nav2 interface</description>
 
-  <maintainer email="isaac-ros-maintainers@nvidia.com">Isaac ROS Maintainers</maintainer>
+  <maintainer email="yangzhou@nyu.edu">Yang Zhou</maintainer>
   <maintainer email="isaac-ros-maintainers@nvidia.com">Isaac ROS Maintainers</maintainer>
   <license>Apache-2.0</license>
   <url type="website">https://developer.nvidia.com/isaac-ros-gems/</url>
@@ -32,7 +32,7 @@
   <author>Alexander Millane</author>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
-  <build_depend>isaac_ros_common</build_depend>
+  <!--build_depend>isaac_ros_common</build_depend-->
 
   <depend>nav_msgs</depend>
   <depend>nav2_costmap_2d</depend>
